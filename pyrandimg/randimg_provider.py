@@ -87,9 +87,3 @@ class RandImgProvider(BaseProvider):
         :return:
         """
         pass
-
-
-if __name__ == '__main__':
-    fake = Faker()
-    fake.add_provider(RandImgProvider)
-    print(fake.image_url())
