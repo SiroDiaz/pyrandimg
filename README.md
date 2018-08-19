@@ -26,5 +26,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/SiroDiaz/pyrandimg.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/SiroDiaz/pyrandimg.svg?style=flat-square
 
+[link-travis]: https://travis-ci.org/SiroDiaz/pyrandimg
+[link-scrutinizer]: https://scrutinizer-ci.com/g/SiroDiaz/pyrandimg/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/SiroDiaz/pyrandimg
+
 [link-author]: https://github.com/SiroDiaz
 [link-contributors]: ../../contributors
