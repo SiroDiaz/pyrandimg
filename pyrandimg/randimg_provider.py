@@ -1,4 +1,3 @@
-from faker import Faker
 from faker.providers import BaseProvider
 from random import randint
 
