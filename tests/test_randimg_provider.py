@@ -47,11 +47,11 @@ class TestRandImgProvider(unittest.TestCase):
     def test_image_url_with_parameters(self):
         self.assertRegex(
             self.faker.image_url(720, 480, 'food', rand=True, blur=4, gray=1),
-            r'https?:\/\/www\.rand\-img\.com\/720\/480/food\?((rand\=\d+)(&blur\=4)&(gray\=1))'
+            r'https?:\/\/www\.rand\-img\.com\/720\/480/food\?([(\&?rand\=\d+)(\&?blur\=4)(\&?gray\=1)])'
         )
         self.assertRegex(
             self.faker.image_url(250, 120, 'fashion', rand=False, blur=4, gray=1),
-            r'^https?:\/\/www\.rand\-img\.com\/250\/120/fashion\?blur\=4&gray\=1$'
+            r'https?:\/\/www\.rand\-img\.com\/250\/120/fashion\?([(\&?blur\=4)(\&?gray\=1)])'
         )
 
     def test_get_gif(self):
