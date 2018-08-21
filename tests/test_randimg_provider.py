@@ -55,10 +55,10 @@ class TestRandImgProvider(unittest.TestCase):
         )
 
     def test_get_gif(self):
-        pass
+        self.assertRegex(self.faker.gif_url(), r'^(https?\:\/\/)?www\.rand\-img\.com\/gif$')
 
     def test_get_gif_with_rand(self):
-        pass
+        self.assertRegex(self.faker.gif_url(True), r'^(https?\:\/\/)?www\.rand\-img\.com\/gif\?rand\=\d+$')
 
     def test_download_gif(self):
         pass

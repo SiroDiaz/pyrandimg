@@ -65,7 +65,11 @@ class RandImgProvider(BaseProvider):
         :param rand: bool if True then a random number will be attached to the URL.
         :return:
         """
-        pass
+        url = '%s/gif' % self.base_url
+        if rand:
+            url += '?rand=%d' % randint(1, 1000000)
+
+        return url
 
     def image(self, dir=None, width=720, height=480, category='', **kwargs):
         """
