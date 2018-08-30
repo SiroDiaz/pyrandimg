@@ -1,5 +1,6 @@
 from faker.providers import BaseProvider
 from random import randint
+import urllib.request
 
 
 class RandImgProvider(BaseProvider):
@@ -20,8 +21,8 @@ class RandImgProvider(BaseProvider):
         """
         started_query = False
         url = self.base_url
-        url += "/%d" % width
-        url += "/%d" % height
+        url += "/%d/%d" % (width, height, )
+
         if len(category) > 0:
             url += "/%s" % category
 
@@ -89,4 +90,8 @@ class RandImgProvider(BaseProvider):
         :param dir:
         :return:
         """
-        pass
+        url = self.gif_url()
+        req = urllib.request.Request(url)
+        req_handler = urllib.request.urlopen(req)
+        # print(req_handler.read())
+

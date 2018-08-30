@@ -62,6 +62,7 @@ class TestRandImgProvider(unittest.TestCase):
 
     def test_download_gif(self):
         pass
+        # self.faker.gif()
 
     def test_download_gif_with_invalid_argument_exception(self):
         pass
