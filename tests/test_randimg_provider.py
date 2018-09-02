@@ -1,4 +1,5 @@
 import unittest
+import os
 from faker import Faker
 from pyrandimg.randimg_provider import RandImgProvider
 
@@ -61,8 +62,27 @@ class TestRandImgProvider(unittest.TestCase):
         self.assertRegex(self.faker.gif_url(True), r'^(https?\:\/\/)?www\.rand\-img\.com\/gif\?rand\=\d+$')
 
     def test_download_gif(self):
-        pass
-        # self.faker.gif()
+        gif = self.faker.gif()
+        gif_dirname = os.path.dirname(gif)
+        _, file_ext = os.path.splitext(gif)
+
+        self.assertEqual('.gif', file_ext)
+        self.assertTrue(os.path.exists(gif))
+        os.remove(gif)
+        print(gif)
+
+    def test_download_gif_with_dirname(self):
+        os.mkdir('output')
+        output_dir = os.path.join(os.getcwd(), 'output')
+        gif = self.faker.gif(dir=output_dir)
+        gif_dirname = os.path.dirname(gif)
+        _, file_ext = os.path.splitext(gif)
+
+        self.assertEqual(output_dir, gif_dirname)
+        self.assertEqual('.gif', file_ext)
+        self.assertTrue(os.path.exists(gif))
+        os.remove(gif)
+        os.rmdir(output_dir)
 
     def test_download_gif_with_invalid_argument_exception(self):
         pass

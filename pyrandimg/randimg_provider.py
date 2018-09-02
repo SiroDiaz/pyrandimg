@@ -1,6 +1,10 @@
 from faker.providers import BaseProvider
-from random import randint
+from random import randint, sample
 import urllib.request
+import urllib.parse
+import tempfile
+import os
+import string
 
 
 class RandImgProvider(BaseProvider):
@@ -26,24 +30,10 @@ class RandImgProvider(BaseProvider):
         if len(category) > 0:
             url += "/%s" % category
 
-        index = 0
-        # Join all key=value for generating the query URL
-        for key, val in kwargs.items():
-            if key == 'rand':
-                if val:
-                    rand_param = 'rand=%d' % randint(1, 1000000)
-                    if index == 0:
-                        url += '?' + rand_param
-                        started_query = True
-                    else:
-                        url += '&' + rand_param
-            else:
-                if started_query:
-                    url += '&%s=%s' % (key, str(val),)
-                else:
-                    url += '?%s=%s' % (key, str(val),)
-                    started_query = True
-            index += 1
+        if len(kwargs) > 0:
+            if kwargs.get('rand', False):
+                kwargs['rand'] = randint(1, 1000000)
+            return url + '?' + urllib.parse.urlencode(kwargs)
 
         return url
 
@@ -72,7 +62,7 @@ class RandImgProvider(BaseProvider):
 
         return url
 
-    def image(self, dir=None, width=720, height=480, category='', **kwargs):
+    def image(self, dir=None, format='jpg', name=None, width=720, height=480, category='', **kwargs):
         """
         Downloads an image to the specified directory.
         :param dir: the directory where to be placed the image
@@ -82,16 +72,43 @@ class RandImgProvider(BaseProvider):
         :param kwargs:
         :return:
         """
-        pass
+        url = self.image_url(width, height, category, **kwargs)
 
-    def gif(self, dir=None):
+        if dir is None:
+            dir = tempfile.gettempdir()
+
+        if filename is None:
+            base62_chars = string.ascii_letters + string.digits
+            filename = ''.join(sample(base62_chars, len(base62_chars))) + '.' + format
+
+        full_path = os.path.join(dir, filename)
+        file = open(full_path, 'wb')
+        req = urllib.request.Request(url)
+
+    def gif(self, dir=None, filename=None):
         """
         Downloads a gif to the specified directory.
-        :param dir:
-        :return:
+        :param dir: the directory to store the gif. Default to None means
+            that takes the default OS temporary directory.
+        :param filename: the name to store the gif. Default to None means
+            that takes a random name.
+        :return: string with the full path name
         """
         url = self.gif_url()
+
+        if dir is None:
+            dir = tempfile.gettempdir()
+
+        if filename is None:
+            base62_chars = string.ascii_letters + string.digits
+            filename = ''.join(sample(base62_chars, len(base62_chars))) + '.gif'
+
+        full_path = os.path.join(dir, filename)
+        file = open(full_path, 'wb')
+
         req = urllib.request.Request(url)
         req_handler = urllib.request.urlopen(req)
-        # print(req_handler.read())
+        file.write(req_handler.read())
+        file.close()
 
+        return full_path

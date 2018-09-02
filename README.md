@@ -5,7 +5,8 @@
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
-Python provider for joke2k/faker package. It helps you to generate random image and gif URLs and also to download images.
+Python provider for joke2k/faker package. It helps you to generate random image and gif URLs and also to download images using
+[rand-img.com][link-rand-img] service.
 
 ## Security
 
@@ -32,3 +33,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [link-author]: https://github.com/SiroDiaz
 [link-contributors]: ../../contributors
+[link-rand-img]: http://www.rand-img.com
