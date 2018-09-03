@@ -1,10 +1,10 @@
 language: python
 python:
-  - "3.2"
-  - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
+  - "pypy-5.3.1"
+  - "pypy3"
 install:
   - "pip install coveralls"
   - "pip install -r requirements.txt"
