@@ -62,9 +62,11 @@ class RandImgProvider(BaseProvider):
 
         return url
 
-    def image(self, dir=None, format='jpg', name=None, width=720, height=480, category='', **kwargs):
+    def image(self, dir=None, filename=None, width=720, height=480, category='', **kwargs):
         """
         Downloads an image to the specified directory.
+        :param filename: the file name with the extension ('example.png'). If None
+            random name will be generated
         :param dir: the directory where to be placed the image
         :param width: the width of the image
         :param height: the height of the image
@@ -79,11 +81,16 @@ class RandImgProvider(BaseProvider):
 
         if filename is None:
             base62_chars = string.ascii_letters + string.digits
-            filename = ''.join(sample(base62_chars, len(base62_chars))) + '.' + format
+            filename = ''.join(sample(base62_chars, len(base62_chars))) + '.jpg'
 
         full_path = os.path.join(dir, filename)
         file = open(full_path, 'wb')
         req = urllib.request.Request(url)
+        req_handler = urllib.request.urlopen(req)
+        file.write(req_handler.read())
+        file.close()
+
+        return full_path
 
     def gif(self, dir=None, filename=None):
         """

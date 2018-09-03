@@ -69,7 +69,6 @@ class TestRandImgProvider(unittest.TestCase):
         self.assertEqual('.gif', file_ext)
         self.assertTrue(os.path.exists(gif))
         os.remove(gif)
-        print(gif)
 
     def test_download_gif_with_dirname(self):
         os.mkdir('output')
@@ -88,7 +87,39 @@ class TestRandImgProvider(unittest.TestCase):
         pass
 
     def test_download_image(self):
-        pass
+        gif = self.faker.gif()
+        gif_dirname = os.path.dirname(gif)
+        _, file_ext = os.path.splitext(gif)
+
+        self.assertEqual('.gif', file_ext)
+        self.assertTrue(os.path.exists(gif))
+        os.remove(gif)
+
+    def test_download_image_with_dirname(self):
+        os.mkdir('output')
+        output_dir = os.path.join(os.getcwd(), 'output')
+        image = self.faker.image(dir=output_dir)
+        image_dirname = os.path.dirname(image)
+        _, file_ext = os.path.splitext(image)
+
+        self.assertEqual(output_dir, image_dirname)
+        self.assertEqual('.jpg', file_ext)
+        self.assertTrue(os.path.exists(image))
+        os.remove(image)
+        os.rmdir(output_dir)
+
+    def test_download_image_with_dirname_and_filename(self):
+        os.mkdir('output')
+        output_dir = os.path.join(os.getcwd(), 'output')
+        image = self.faker.image(dir=output_dir, filename='testing.png')
+        image_dirname = os.path.dirname(image)
+        _, file_ext = os.path.splitext(image)
+
+        self.assertEqual(output_dir, image_dirname)
+        self.assertEqual('.png', file_ext)
+        self.assertTrue(os.path.exists(image))
+        os.remove(image)
+        os.rmdir(output_dir)
 
     def test_download_image_with_exception(self):
         pass
