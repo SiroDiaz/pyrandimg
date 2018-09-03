@@ -2,7 +2,7 @@
 
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Coverage Status](https://coveralls.io/repos/github/SiroDiaz/pyrandimg/badge.svg?branch=master)](https://coveralls.io/github/SiroDiaz/pyrandimg?branch=master)
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 Python provider for joke2k/faker package. It helps you to generate random image and gif URLs and also to download images using
